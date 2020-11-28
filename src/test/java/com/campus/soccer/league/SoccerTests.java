@@ -10,12 +10,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class SoccerTests {
+class SoccerTests {
 
     private League league;
     Team realMadrid;
     Team manchesterCity;
     Team bayernMünchen;
+    Team juventusTurin;
 
     @BeforeEach
     void setUp(){
@@ -23,6 +24,7 @@ public class SoccerTests {
         realMadrid = new Team("Real Madrid");
         manchesterCity = new Team("Manchester City");
         bayernMünchen = new Team("Bayern München");
+        juventusTurin = new Team("Juventus Turin");
     }
 
 
@@ -44,6 +46,9 @@ public class SoccerTests {
         Game game2 = new Game(manchesterCity, bayernMünchen, 2, 2);
         league.addGameResult(game2);
         assertEquals(bayernMünchen, league.getTeamTable().get(1));
+        Game game3 = new Game(juventusTurin, bayernMünchen, 2, 0);
+        league.addGameResult(game3);
+        assertEquals(juventusTurin, league.getTeamTable().get(1));
     }
 
     @Test
@@ -54,6 +59,9 @@ public class SoccerTests {
         Game game2 = new Game(manchesterCity, bayernMünchen, 2, 2);
         league.addGameResult(game2);
         assertEquals(1, league.getTeamTable().getFirst().getDraws());
+        Game game3 = new Game(manchesterCity, juventusTurin, 2, 2);
+        league.addGameResult(game3);
+        assertEquals(2, league.getTeamTable().getFirst().getDraws());
     }
 
     @Test
@@ -64,6 +72,9 @@ public class SoccerTests {
         Game game2 = new Game(manchesterCity, bayernMünchen, 2, 2);
         league.addGameResult(game2);
         assertEquals(1, league.getTeamTable().getFirst().getWins());
+        Game game3 = new Game(juventusTurin, bayernMünchen, 2, 1);
+        league.addGameResult(game3);
+        assertEquals(1, league.getTeamTable().getFirst().getWins());
     }
 
     @Test
@@ -73,8 +84,10 @@ public class SoccerTests {
         assertEquals(0, league.getTeamTable().getFirst().getDefeats());
         Game game2 = new Game(manchesterCity, bayernMünchen, 2, 3);
         league.addGameResult(game2);
-        assertEquals(1, league.getTeamTable().getFirst().getDefeats()
-        );
+        assertEquals(1, league.getTeamTable().getFirst().getDefeats());
+        Game game3 = new Game(juventusTurin, bayernMünchen, 2, 3);
+        league.addGameResult(game3);
+        assertEquals(0, league.getTeamTable().getFirst().getDefeats());
     }
 
     @Test
@@ -84,6 +97,9 @@ public class SoccerTests {
         assertEquals(-2, league.getTeamTable().getLast().getGoalDifference());
         Game game2 = new Game(manchesterCity, bayernMünchen, 2, 2);
         league.addGameResult(game2);
+        assertEquals(-2, league.getTeamTable().getLast().getGoalDifference());
+        Game game3 = new Game(manchesterCity, juventusTurin, 2, 2);
+        league.addGameResult(game3);
         assertEquals(-2, league.getTeamTable().getLast().getGoalDifference());
     }
 }
