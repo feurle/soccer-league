@@ -15,7 +15,7 @@ class SoccerTests {
     private League league;
     Team realMadrid;
     Team manchesterCity;
-    Team bayernMünchen;
+    Team bayernMuenchen;
     Team juventusTurin;
 
     @BeforeEach
@@ -23,7 +23,7 @@ class SoccerTests {
         league = new League();
         realMadrid = new Team("Real Madrid");
         manchesterCity = new Team("Manchester City");
-        bayernMünchen = new Team("Bayern München");
+        bayernMuenchen = new Team("Bayern München");
         juventusTurin = new Team("Juventus Turin");
     }
 
@@ -33,7 +33,7 @@ class SoccerTests {
         Game game1 = new Game(realMadrid, manchesterCity, 1, 3);
         league.addGameResult(game1);
         assertEquals(2, league.getTeamTable().size());
-        Game game2 = new Game(manchesterCity, bayernMünchen, 2, 2);
+        Game game2 = new Game(manchesterCity, bayernMuenchen, 2, 2);
         league.addGameResult(game2);
         assertEquals(3, league.getTeamTable().size());
     }
@@ -43,10 +43,10 @@ class SoccerTests {
         Game game1 = new Game(realMadrid, manchesterCity, 1, 3);
         league.addGameResult(game1);
         assertEquals(manchesterCity, league.getTeamTable().getFirst());
-        Game game2 = new Game(manchesterCity, bayernMünchen, 2, 2);
+        Game game2 = new Game(manchesterCity, bayernMuenchen, 2, 2);
         league.addGameResult(game2);
-        assertEquals(bayernMünchen, league.getTeamTable().get(1));
-        Game game3 = new Game(juventusTurin, bayernMünchen, 2, 0);
+        assertEquals(bayernMuenchen, league.getTeamTable().get(1));
+        Game game3 = new Game(juventusTurin, bayernMuenchen, 2, 0);
         league.addGameResult(game3);
         assertEquals(juventusTurin, league.getTeamTable().get(1));
     }
@@ -56,7 +56,7 @@ class SoccerTests {
         Game game1 = new Game(realMadrid, manchesterCity, 1, 3);
         league.addGameResult(game1);
         assertEquals(0, league.getTeamTable().getFirst().getDraws());
-        Game game2 = new Game(manchesterCity, bayernMünchen, 2, 2);
+        Game game2 = new Game(manchesterCity, bayernMuenchen, 2, 2);
         league.addGameResult(game2);
         assertEquals(1, league.getTeamTable().getFirst().getDraws());
         Game game3 = new Game(manchesterCity, juventusTurin, 2, 2);
@@ -69,10 +69,10 @@ class SoccerTests {
         Game game1 = new Game(realMadrid, manchesterCity, 1, 3);
         league.addGameResult(game1);
         assertEquals(1, league.getTeamTable().getFirst().getWins());
-        Game game2 = new Game(manchesterCity, bayernMünchen, 2, 2);
+        Game game2 = new Game(manchesterCity, bayernMuenchen, 2, 2);
         league.addGameResult(game2);
         assertEquals(1, league.getTeamTable().getFirst().getWins());
-        Game game3 = new Game(juventusTurin, bayernMünchen, 2, 1);
+        Game game3 = new Game(juventusTurin, bayernMuenchen, 2, 1);
         league.addGameResult(game3);
         assertEquals(1, league.getTeamTable().getFirst().getWins());
     }
@@ -82,10 +82,10 @@ class SoccerTests {
         Game game1 = new Game(realMadrid, manchesterCity, 1, 3);
         league.addGameResult(game1);
         assertEquals(0, league.getTeamTable().getFirst().getDefeats());
-        Game game2 = new Game(manchesterCity, bayernMünchen, 2, 3);
+        Game game2 = new Game(manchesterCity, bayernMuenchen, 2, 3);
         league.addGameResult(game2);
         assertEquals(1, league.getTeamTable().getFirst().getDefeats());
-        Game game3 = new Game(juventusTurin, bayernMünchen, 2, 3);
+        Game game3 = new Game(juventusTurin, bayernMuenchen, 2, 3);
         league.addGameResult(game3);
         assertEquals(0, league.getTeamTable().getFirst().getDefeats());
     }
@@ -95,7 +95,7 @@ class SoccerTests {
         Game game1 = new Game(realMadrid, manchesterCity, 1, 3);
         league.addGameResult(game1);
         assertEquals(-2, league.getTeamTable().getLast().getGoalDifference());
-        Game game2 = new Game(manchesterCity, bayernMünchen, 2, 2);
+        Game game2 = new Game(manchesterCity, bayernMuenchen, 2, 2);
         league.addGameResult(game2);
         assertEquals(-2, league.getTeamTable().getLast().getGoalDifference());
         Game game3 = new Game(manchesterCity, juventusTurin, 2, 2);
