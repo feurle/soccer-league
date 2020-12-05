@@ -85,4 +85,17 @@ public class Team implements Comparable<Team> {
     public int compareTo(Team other){
         return getPoints() > other.getPoints() ? -1 : getPoints() < other.getPoints() ? 1 : 0;
     }
+
+    @Override
+    public String toString() {
+        return "Team{" +
+                "name='" + name + '\'' +
+                ", points=" + points +
+                ", wins=" + wins +
+                ", defeats=" + defeats +
+                ", draws=" + draws +
+                ", goalsShot=" + goalsShot +
+                ", goalsReceived=" + goalsReceived +
+                '}';
+    }
 }

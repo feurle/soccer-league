@@ -5,9 +5,10 @@ import java.util.LinkedList;
 
 public class League {
 
-    private LinkedList<Team> teamTable;
+    private final LinkedList<Team> teamTable;
 
     public void addGameResult(Game g){
+
         if(teamTable.contains(g.getHomeTeam())){
             g.getHomeTeam().addGame(g);
         }
@@ -26,7 +27,7 @@ public class League {
     }
 
     public League() {
-        teamTable = new LinkedList<Team>();
+        this.teamTable = new LinkedList<>();
     }
 
     public LinkedList<Team> getTeamTable() {

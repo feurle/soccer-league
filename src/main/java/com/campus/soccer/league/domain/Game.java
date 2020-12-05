@@ -9,10 +9,16 @@ package com.campus.soccer.league.domain;
  */
 public class Game {
 
-    private Team homeTeam;
-    private Team guestTeam;
+    private final Team homeTeam;
+    private final Team guestTeam;
     private int goalsForHomeTeam;
     private int goalsForGuestTeam;
+
+
+    public Game(Team homeTeam, Team guestTeam) {
+        this.homeTeam = homeTeam;
+        this.guestTeam = guestTeam;
+    }
 
     /**
      *
@@ -57,5 +63,28 @@ public class Game {
 
     public int getGoalsForGuestTeam() {
         return goalsForGuestTeam;
+    }
+
+    public void setGoalsForHomeTeam(int goalsForHomeTeam) {
+        this.goalsForHomeTeam = goalsForHomeTeam;
+    }
+
+    public void setGoalsForGuestTeam(int goalsForGuestTeam) {
+        this.goalsForGuestTeam = goalsForGuestTeam;
+    }
+
+
+    public String getGameResultAsString() {
+        StringBuffer sb = new StringBuffer("Hometeam ").append(homeTeam.getName());
+        if (goalsForHomeTeam > goalsForGuestTeam) {
+            sb.append(" wins ");
+        } else if (goalsForHomeTeam < goalsForGuestTeam) {
+            sb.append(" defeats ");
+        } else {
+            sb.append(" draws ");
+        }
+        sb.append(goalsForHomeTeam).append(":").append(goalsForGuestTeam);
+        sb.append(" against guestteam ").append(guestTeam.getName());
+        return sb.toString();
     }
 }
