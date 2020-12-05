@@ -14,6 +14,12 @@ public class Game {
     private int goalsForHomeTeam;
     private int goalsForGuestTeam;
 
+
+    public Game(Team homeTeam, Team guestTeam) {
+        this.homeTeam = homeTeam;
+        this.guestTeam = guestTeam;
+    }
+
     /**
      *
      * @param homeTeam
@@ -65,5 +71,20 @@ public class Game {
 
     public void setGoalsForGuestTeam(int goalsForGuestTeam) {
         this.goalsForGuestTeam = goalsForGuestTeam;
+    }
+
+
+    public String getGameResultAsString() {
+        StringBuffer sb = new StringBuffer("Hometeam ").append(homeTeam.getName());
+        if (goalsForHomeTeam > goalsForGuestTeam) {
+            sb.append(" wins ");
+        } else if (goalsForHomeTeam < goalsForGuestTeam) {
+            sb.append(" defeats ");
+        } else {
+            sb.append(" draws ");
+        }
+        sb.append(goalsForHomeTeam).append(":").append(goalsForGuestTeam);
+        sb.append(" against guestteam ").append(guestTeam.getName());
+        return sb.toString();
     }
 }

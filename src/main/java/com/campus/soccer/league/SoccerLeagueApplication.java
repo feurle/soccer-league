@@ -22,10 +22,6 @@ public class SoccerLeagueApplication implements CommandLineRunner {
 		log.info("{}: {}", threadName, message);
 	}
 
-	static int randomGoals() {
-		Random random = new Random();
-		return random.nextInt(10 + 1);
-	}
 
 
 	public static void main(String[] args) {
@@ -34,48 +30,41 @@ public class SoccerLeagueApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-/*		threadMessage("Start the soccer league application ...");
+		threadMessage("Start the soccer league application ...");
 
+		// init teams and league
 		Team real = new Team("Real Madrid");
 		Team bayern = new Team("Bayern München");
-		Game game = new Game(real,bayern,0,0);
-
-
-
-		Thread soccerGameThread = new Thread(new SoccerGameThread(game));
-		soccerGameThread.start();
-		soccerGameThread.join();
-		threadMessage("Waiting for SoccerGameThread to finish");
-*/
-		// Init League and Teams
+		Team manchester = new Team("Manchester City");
+		Team juventus = new Team("Juventus Turin");
 		League league = new League();
-		Team realMadrid = new Team("Real Madrid");
-		Team manchesterCity = new Team("Manchester City");
-		Team bayernMuenchen = new Team("Bayern Muenchen");
-		Team juventusTurin = new Team("Juventus Turin");
 
-		// Game1 hinspiel
-		Game game1 = new Game(realMadrid,manchesterCity, randomGoals(), randomGoals());
-		league.addGameResult(game1);
+		// Hinspiele
+		leagueGames(bayern, real, juventus, manchester, league);
 
-		// Game2 hinspiel
-		Game game2 = new Game(bayernMuenchen, juventusTurin, randomGoals(),randomGoals());
-		league.addGameResult(game2);
-
-		// Game3 rückspiel
-		Game game3 = new Game(manchesterCity, realMadrid, randomGoals(), randomGoals());
-		league.addGameResult(game3);
-
-		// Game4 rückspiel
-		Game game4 = new Game(juventusTurin, bayernMuenchen, randomGoals(), randomGoals());
-		league.addGameResult(game4);
-
-
+		// Hinspiele
+		leagueGames(real, bayern, manchester, juventus, league);
 
 		log.info("The league TeamTable has {} entries.", league.getTeamTable().size());
 
 		league.getTeamTable().forEach(team -> {
 			log.info(team.toString());
 		});
+
 	}
+
+	private void leagueGames(Team team1, Team team2, Team team3, Team team4, League league) throws InterruptedException {
+		Thread game1 = new Thread(new SoccerGameThread(new Game(team1, team2), league));
+		Thread game2 = new Thread(new SoccerGameThread(new Game(team3, team4), league));
+		game1.start();
+		game2.start();
+		threadMessage("Waiting for SoccerGameThread to finish");
+
+		while (game1.isAlive() && game2.isAlive()) {
+			threadMessage("Waiting until games are finished ...");
+			game1.join();
+			game2.join();
+		}
+	}
+
 }
