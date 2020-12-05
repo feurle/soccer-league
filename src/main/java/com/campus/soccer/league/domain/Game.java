@@ -9,8 +9,8 @@ package com.campus.soccer.league.domain;
  */
 public class Game {
 
-    private Team homeTeam;
-    private Team guestTeam;
+    private final Team homeTeam;
+    private final Team guestTeam;
     private int goalsForHomeTeam;
     private int goalsForGuestTeam;
 
@@ -57,5 +57,13 @@ public class Game {
 
     public int getGoalsForGuestTeam() {
         return goalsForGuestTeam;
+    }
+
+    public void setGoalsForHomeTeam(int goalsForHomeTeam) {
+        this.goalsForHomeTeam = goalsForHomeTeam;
+    }
+
+    public void setGoalsForGuestTeam(int goalsForGuestTeam) {
+        this.goalsForGuestTeam = goalsForGuestTeam;
     }
 }
